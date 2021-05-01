@@ -4,7 +4,7 @@
   "description": "This is a back-end created with MongoDB, Node and Express",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js",
+    "dev": "nodemon --exec babel-node src/Server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "git@github.com:Atacha/API-Express.git",
@@ -12,9 +12,11 @@
   "license": "MIT",
   "dependencies": {
     "apollo-server-express": "^2.23.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^15.5.0",
-    "graphql-tools": "^7.0.4"
+    "mongoose": "^5.12.7"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
