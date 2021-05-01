@@ -5,32 +5,33 @@ import mongoose from 'mongoose';
 
 import Product from './models/products/ProductsSchema';
 
-const app = express();
 dotenv.config();
 
+const app = express();
 const PORT = process.env.PORT || 3000;
-
 const server = new ApolloServer({
   context: { Product },
-  modules: [require('./models/products/index')],
+  modules: [require('./models/products')],
 });
 
 server.applyMiddleware({ app });
 
-mongoose
-  .connect(process.env.DATABASE, {
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    app.listen(PORT, () =>
-      console.log(
-        `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
-      )
-    );
-  })
-  .catch((err) => {
-    console.log(`Error:${err}`);
-  });
+(async function () {
+  try {
+    await mongoose.connect(process.env.DATABASE, {
+      useCreateIndex: true,
+      useFindAndModify: false,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('✨ MongoDB is conected');
+  } catch (error) {
+    console.log(`Error:${error}`);
+  }
+})();
+
+app.listen(PORT, () =>
+  console.log(
+    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+  )
+);

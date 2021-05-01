@@ -12,9 +12,12 @@ const typeDefs = gql`
     status: String
     price: Int
   }
+
   type Query {
-    allProducts: [Product!]!
+    AllProducts: [Product]!
+    Product(_id: ID!): Product
   }
+
   type Mutation {
     CreateProduct(
       name: String!
@@ -26,11 +29,16 @@ const typeDefs = gql`
 `;
 const resolvers = {
   Query: {
-    allProducts: async (parent, args, { Product }) => {
+    AllProducts: async (parent, args, { Product }) => {
       const products = await Product.find();
       return products.map((el) => {
         return el;
       });
+    },
+    Product: async (parent, args, { Product }) => {
+      const { _id } = args;
+      const product = await Product.findById(_id);
+      return product;
     },
   },
   Mutation: {
