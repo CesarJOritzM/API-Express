@@ -4,11 +4,11 @@
   "description": "This is a back-end created with MongoDB, Node and Express",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node ./build/Server.js",
+    "start": "npm run build && node ./dist/Server.js",
     "dev": "nodemon --exec babel-node src/",
     "build": "npm run clean && npm run build-babel",
-    "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel -d ./build src/ -s"
+    "clean": "rm -rf dist && mkdir dist",
+    "build-babel": "babel -d ./dist src/ -s"
   },
   "repository": "git@github.com:Atacha/API-Express.git",
   "author": "CesarJOritzM <cesarjavierortizmontero@gmail.com>,Marlon Ramirez, Camilo Santana",
